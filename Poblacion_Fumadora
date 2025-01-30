@@ -1,0 +1,17 @@
+import pandas as pd
+datos=pd.read_csv('ObesityDataSet.csv')
+conteo_fumadores = datos['SMOKE'].value_counts()
+print(conteo_fumadores)
+
+import matplotlib.pyplot as plt
+
+# Gráfico de barras
+plt.figure(figsize=(8, 6))  # Tamaño del gráfico
+conteo_fumadores.plot(kind='bar', color=['skyblue', 'red'])
+
+# Características del gráfico
+plt.title('Fumas?')
+plt.xlabel('')
+plt.xticks(rotation=0)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.show()

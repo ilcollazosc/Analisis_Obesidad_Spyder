@@ -1,0 +1,35 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Cargar el dataset
+datos = pd.read_csv('ObesityDataSet.csv')
+
+# Agrupar por 'NObeyesdad' y 'Gender', y contar la cantidad de personas
+tipo_peso = datos.groupby(['NObeyesdad', 'Gender']).size().unstack()
+
+# Definir el orden de las categorías de peso
+orden = [
+    'Insufficient_Weight', 'Normal_Weight', 'Overweight_Level_I',
+    'Overweight_Level_II', 'Obesity_Type_I', 'Obesity_Type_II', 'Obesity_Type_III'
+]
+
+# Reindexar el DataFrame según el orden definido
+tipo_peso = tipo_peso.reindex(orden)
+
+# Mostrar el DataFrame
+print(tipo_peso)
+
+# Crear el gráfico de barras agrupadas
+tipo_peso.plot(kind='bar', color=['pink', 'skyblue'], edgecolor='black')
+
+# Personalizar el gráfico
+plt.title('Distribución de categorías de peso por género')
+plt.xlabel('Categoría de peso')
+plt.ylabel('Cantidad de personas')
+plt.xticks(rotation=45, ha='right')
+plt.legend(title='Género')
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+
+# Mostrar el gráfico
+plt.tight_layout()
+plt.show()
